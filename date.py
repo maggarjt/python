@@ -2,6 +2,10 @@
 #create init method
 # 2 attributes
 #create an object form class
+
+
+from PIL import Image
+
 import datetime
 import tkinter as tk
 
@@ -88,7 +92,20 @@ class Person():
 		age = today.year - self.birthdate.year
 		return age
 
+#create variable for image path
+image = Image.open('C:\\Users\\Jesse\\Desktop\\purple.jpg')
 
+#convert image to small size and maintain as much quality as possible with antialias
+image.thumbnail((100,100), Image.ANTIALIAS)
+
+#create TK image from jpeg, you do this due to Tk weakness with photo formats ex, jpg, .tif, .psd, 
+photo = ImageTk.PhotoImage(image)
+
+#store image in a label 
+label_image = Tk.Label(image=photo)
+
+#place label with image stored in it on window via col, row
+label_image.grid(column=1, row=0)
 
 
 
