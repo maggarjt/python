@@ -1,0 +1,26 @@
+from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5.QtWidgets import (QApplication, QWidget, QPushButton, QLabel, QLineEdit, QGridLayout, QMessageBox)
+import json
+import requests
+from secondWindow import Ui_SecondWindow
+from loginpage import Ui_LoginPage
+
+data = json.load(open('passQT.json', 'r'))
+info = json.load(open('studentsQT.json', 'r'))
+moves={"Americana":0,"Kimura":0,"Armbar":0,"Triangle":0}
+
+class Ui_MainWindow(object):
+    def openWindow(self):
+        self.window = QtWidgets.QMainWindow()
+        self.ui2 = Ui_SecondWindow()
+        self.ui2.setupUi(self.window)
+        self.window.show()
+
+    def create_login(self):
+        self.window = QtWidgets.QMainWindow()
+        self.ui2 = Ui_LoginPage()
+        self.ui2.setupUi(self.window)
+        self.window.show()
+        
+        #attempting to add info to JSON file external and pull from that data to poulate second and third windows for workout analysis and guidance
+        specific to users choices that month
