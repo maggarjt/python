@@ -7,7 +7,7 @@ from loginpage import Ui_LoginPage
 
 data = json.load(open('passQT.json', 'r'))
 info = json.load(open('studentsQT.json', 'r'))
-moves={"Americana":0,"Kimura":0,"Armbar":0,"Triangle":0}
+moves={"Pushup":0,"Squat":0,"Situp":0,"Burpee":0}
 
 class Ui_MainWindow(object):
     def openWindow(self):
