@@ -1,0 +1,49 @@
+****joining two tables based off of matching columns
+
+SELECT player, teamid, stadium, mdate
+  FROM game JOIN goal ON (game.id=goal.matchid)
+WHERE teamid = 'GER'
+
+******* second example with name search
+SELECT team1, team2, player
+FROM game JOIN goal ON (game.id = goal.matchid)
+WHERE player LIKE 'Mario%'
+
+SELECT player, teamid, coach,  gtime
+  FROM goal JOIN eteam ON (eteam.id = goal.teamid)
+ WHERE gtime<=10
+
+****** example without WHERE
+SELECT mdate, teamname
+FROM game JOIN eteam ON (eteam.id = game.team1 AND 
+ coach LIKE '%Santos')
+
+***** getting list of players scoring on Germany after joining tables, then avoiding duplicates with DISTINCT
+SELECT DISTINCT player 
+  FROM game JOIN goal ON matchid = id 
+    WHERE (teamid <>'GER') AND (team2 ='GER' OR team1 = 'GER')
+
+******* must use GROUP BY becuase ORDER BY must be down on selections row with aggregate functions?  GROUP vs ORDER BY and AGGREGATE FN
+SELECT teamname, COUNT(gtime)
+  FROM eteam JOIN goal ON (eteam.id=goal.teamid)
+ GROUP BY teamname
+
+Show the stadium and the number of goals scored in each stadium.
+SELECT stadium, COUNT(gtime)
+FROM game JOIN goal ON (game.id = goal.matchid)
+GROUP BY stadium
+
+*******    MUST! group by select paramters not in the aggregate function, in this case mdate and matchid, 
+********   order doesnt matter only grouping by them since there is no AGG functions (SUM, COUNT etc..)
+
+SELECT for every match involving 'POL', show the matchid, date and the number of goals scored.
+SELECT matchid,mdate, COUNT(gtime)
+  FROM game JOIN goal ON (goal.matchid = game.id)
+ WHERE (team1 = 'POL' OR team2 = 'POL')
+GROUP BY mdate, matchid
+
+******* For every match where 'GER' scored, show matchid, match date and the number of goals scored by 'GER'
+SELECT matchid, mdate, COUNT(gtime)
+FROM goal JOIN game ON (game.id=goal.matchid)
+WHERE teamid = 'GER'
+GROUP BY matchid, mdate
