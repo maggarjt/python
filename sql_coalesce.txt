@@ -1,0 +1,9 @@
+******  replacing null values with correct value and choosing which table displays thyem and whic rows to be excluded
+
+SELECT teacher.name, COALESCE(dept.name, 'None') AS Dept
+FROM teacher LEFT JOIN dept ON (teacher.dept=dept.id)
+
+******** replacing number values with INT replacement when value is null
+
+SELECT name,  COALESCE(mobile,'07986 444 2266')
+FROM teacher 
