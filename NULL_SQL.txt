@@ -1,0 +1,24 @@
+******  COUNT FUNCTION to see values numerically
+
+SELECT COUNT(name) AS name#, COUNT(mobile) AS cell#
+FROM teacher
+
+*******  selecting distinct depts and then reselcting from same column and Counting them
+SELECT DISTINCT COALESCE(dept.name,'Engineering'), COUNT(dept.name) FROM dept RIGHT JOIN teacher ON (dept.id=teacher.dept)
+GROUP BY dept.name
+
+******  using case in SELECT statement to replace string varchar values
+
+SELECT name, CASE WHEN dept IN (1,2) THEN 'Sci'
+                  ELSE 'Art'
+                  END
+                  FROM teacher
+
+******* applying CASE to column then joining with join to focus on the teacher names
+SELECT teacher.name , CASE WHEN dept IN(1,2) 
+                           THEN 'Sci'
+                           WHEN dept IN (3)
+                           THEN 'Art'
+                           ELSE 'None'
+                       END
+FROM teacher LEFT JOIN dept ON (teacher.dept=dept.id)
